@@ -1,0 +1,7 @@
+# Python Caching
+__pycache__/
+*.py[cod]
+
+# VS Code files
+.vscode/
+scraping.code-workspace
