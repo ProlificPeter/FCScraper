@@ -5,3 +5,6 @@ __pycache__/
 # VS Code files
 .vscode/
 scraping.code-workspace
+
+# Constants
+constants.py
