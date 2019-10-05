@@ -1,5 +1,8 @@
-# Script to retrieve 2008 stats
-#(C) Peter RL Granlund, RL Dimensions
+# Script to retrieve FCS stats
+#(C) PRL Granlund, RL Dimensions
+#
+# FYI: Needs to be updated to support different format of years for different conferences.
+#       Currently only functional for initial scraping of Missouri Valley.
 
 # Import statements
 import requests
@@ -53,10 +56,10 @@ def checkYear(year):
     else:
         return str(year)
 
-# Initial Load process; kicks off a 4-process pool that accesses a specified range of years (current 08 & 09)
+# Initial Load process; kicks off a 4-process pool that accesses a specified range of years (currently '16)
 with ProcessPoolExecutor(max_workers=4) as yearExecutor:
     yearStart = time.time()
-    yearFutures = [ yearExecutor.submit(boxScoresForYear, checkYear(year)) for year in range(10,18) ]
+    yearFutures = [ yearExecutor.submit(boxScoresForYear, checkYear(year)) for year in range(16,17) ]
     yearResults = []
     for result in as_completed(yearFutures):
         yearResults.append(result)
