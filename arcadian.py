@@ -4,6 +4,7 @@
 # File shepherd object to create and manage files from a specific base folder
 
 from webwishbone import WebWishbone
+from file import File
 import os
 
 class Arcadian:
@@ -13,7 +14,8 @@ class Arcadian:
         self.listOfDirectories = WebWishbone.hunt(baseDirectory, True)
 
     # Read Functions
-
+    def readFromFile(self, location):
+        return open(location)
 
     # Write Functions
     def checkForDir(self, location):
@@ -27,15 +29,10 @@ class Arcadian:
             os.makedirs(location)
         return self.checkForDir(location)
 
-    def writeFile(self, fileLocation, fileContents):
-        if self.checkForDir(self.getDirectoryFromFile(fileLocation)):
-            outputFile = open(fileLocation, "w")
-            outputFile.write(fileContents)
+    def writeFile(self, file):
+        if self.checkForDir(file.directory):
+            outputFile = open(file.filePath, "w")
+            outputFile.write(file.contents)
         else:
             print("Could not create the directory for this file.")
 
-    def getDirectoryFromFile(self, fileLocation):
-        directoryList = fileLocation.split('/')
-        outputDirectory = "/"
-        for directory in range(0, (len(directoryList)-1)):
-            outputDirectory = os.path.join(outputDirectory, directory)
