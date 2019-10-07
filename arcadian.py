@@ -16,16 +16,16 @@ class Arcadian:
 
 
     # Write Functions
+    def checkForDir(self, location):
+            if os.path.exists(location):
+                return True
+            else:
+                return False
+
     def confirmDir(self, location):
         if not os.path.exists(location):
             os.makedirs(location)
         return self.checkForDir(location)
-        
-    def checkForDir(self, location):
-        if os.path.exists(location):
-            return True
-        else:
-            return False
 
     def writeFile(self, fileLocation, fileContents):
         if self.checkForDir(self.getDirectoryFromFile(fileLocation)):
