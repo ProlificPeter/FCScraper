@@ -74,6 +74,7 @@ class Arcadian:
         if self.checkForDir(file.directory):
             outputFile = open(file.filePath, "w")
             outputFile.write(file.contents)
+            outputFile.close()
         else:
-            print("Could not create the directory for this file.")
+            print("Could not create the directory for this file:" + file.directory)
 

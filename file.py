@@ -19,21 +19,39 @@ class File():
     
     def getContentsOfFile(self):
         return self.contents
-
+        '''if len(self.contents) == 0:
+            self.readToContents
+            return self.contents
+        else:
+            return self.contents'''
+        
     def getDirectoryFromFile(self, fileLocation):
         directoryList = fileLocation.split('/')
         directoryList.remove(directoryList[-1])
         # outputDirectory = "/"
-        return "/" + "-".join(directoryList)
+        return "/".join(directoryList)
 
     def findExtension(self):
         return self.filePath.split('.')[-1]
 
     def readToContents(self):
-        self.contents = open(self.filePath)
+        with open(self.filePath, 'r') as content_file:
+            content = content_file.read()
+            content_file.close()
+        self.contents = self.sanitizeText(content)
 
     def readFile(self):
-        return open(self.filePath)
+        with open(self.filePath, 'r') as content_file:
+            content = content_file.read().decode('utf-8','ignore')
+            content_file.close()
+        self.contents = self.sanitizeText(content)
+
+    def sanitizeText(self, text):
+        content = text
+        content.replace('&nbsp;', ' ')
+        content.replace('&#149;', '')
+        return content
+
 
     def updatePath(self):
         self.filePath = os.path.join(self.directory, self.fileName)
