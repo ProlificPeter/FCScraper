@@ -4,6 +4,8 @@
 # object to handle file-specific information and functions; name, directory, contents
 
 
+import os
+
 class File():
 
     def __init__(self, filePath, readFileBool):
@@ -14,18 +16,35 @@ class File():
         self.contents = ""
         if readFileBool == True:
             self.readToContents()
-        
+    
+    def getContentsOfFile(self):
+        return self.contents
+
     def getDirectoryFromFile(self, fileLocation):
         directoryList = fileLocation.split('/')
         directoryList.remove(directoryList[-1])
         # outputDirectory = "/"
         return "/" + "-".join(directoryList)
 
+    def findExtension(self):
+        return self.filePath.split('.')[-1]
+
     def readToContents(self):
         self.contents = open(self.filePath)
 
     def readFile(self):
         return open(self.filePath)
+
+    def updatePath(self):
+        self.filePath = os.path.join(self.directory, self.fileName)
+
+    def setFileName(self, newName):
+        if len(newName.split('.')) > 0:
+            self.fileName = newName
+            self.extension = self.findExtension()
+        else:
+            print("Unable to accept new name due to lack of file extension")
+        
 
 # To be added later; possibly consolidate with Umbrella class from the script folder
 """def breakdown(self, name):
