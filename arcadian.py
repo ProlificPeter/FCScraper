@@ -9,9 +9,9 @@ import os
 
 class Arcadian:
 
-    def __init__(self, baseDirectory):
+    def __init__(self, baseDirectory, htmlFileBool):
         self.baseDirectory = baseDirectory
-        self.listOfDirectories = WebWishbone.hunt(baseDirectory, True)
+        self.listOfDirectories = WebWishbone.hunt(baseDirectory, htmlFileBool)
         self.listOfFiles = []
         self.populateListOfFiles(False)
 
@@ -69,6 +69,7 @@ class Arcadian:
         if not os.path.exists(location):
             os.makedirs(location)
         return self.checkForDir(location)
+
 
     def writeFile(self, file):
         if self.checkForDir(file.directory):

@@ -52,6 +52,8 @@ class File():
         content.replace('&#149;', '')
         return content
 
+    def overwriteContents(self, newContents):
+        self.contents = newContents
 
     def updatePath(self):
         self.filePath = os.path.join(self.directory, self.fileName)
@@ -62,7 +64,18 @@ class File():
             self.extension = self.findExtension()
         else:
             print("Unable to accept new name due to lack of file extension")
-        
+
+    def writeFile(self):
+        with open(self.filePath, "w") as file_out:
+            file_out.write(self.contents)
+            file_out.close()
+
+    def overwriteAndSave(self, newContents):
+        self.overwriteContents(newContents)
+        self.writeFile()
+
+
+
 
 # To be added later; possibly consolidate with Umbrella class from the script folder
 """def breakdown(self, name):

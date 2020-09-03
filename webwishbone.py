@@ -16,5 +16,6 @@ class WebWishbone(object):
                     if (filename.endswith(".htm") or filename.endswith(".html")) and not filename.startswith(".DS_Store"):
                         listOfDirectoryAndFiles.append((dirPath, filename))
                 else:
-                    listOfDirectoryAndFiles.append((dirPath, filename))
+                    if not filename.startswith(".DS_Store"):
+                        listOfDirectoryAndFiles.append((dirPath, filename))
         return listOfDirectoryAndFiles
